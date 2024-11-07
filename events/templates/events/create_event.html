@@ -1,0 +1,242 @@
+{% extends "base.html" %} 
+
+{% block title %}Create Event{% endblock %} 
+
+{% block content %} 
+{% comment %}
+<div
+  class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
+>
+  <div class="max-w-md w-full space-y-8">
+    <div>
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+        Create a New Event
+      </h2>
+    </div>
+    <form class="mt-8 space-y-6" method="POST">
+      {% csrf_token %}
+      <div class="rounded-md shadow-sm -space-y-px">
+        <div>
+          <label for="title" class="sr-only">Title</label>
+          <input
+            id="title"
+            name="title"
+            type="text"
+            required
+            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Title"
+          />
+        </div>
+        <div>
+          <label for="description" class="sr-only">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            required
+            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Description"
+          ></textarea>
+        </div>
+        <div>
+          <label for="date" class="sr-only">Date</label>
+          <input
+            id="date"
+            name="date"
+            type="datetime-local"
+            required
+            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Date"
+          />
+        </div>
+        <div>
+          <label for="location" class="sr-only">Location</label>
+          <input
+            id="location"
+            name="location"
+            type="text"
+            required
+            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Location"
+          />
+        </div>
+        <div>
+          <label for="category" class="sr-only">Category</label>
+          <select
+            id="category"
+            name="category"
+            required
+            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-50 sm:text-sm"
+          >
+            {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div>
+          <label for="max_capacity" class="sr-only">Max Capacity</label>
+          <input
+            id="max_capacity"
+            name="max_capacity"
+            type="number"
+            required
+            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Max Capacity"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button
+          type="submit"
+          class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Create Event
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endcomment %}
+
+<div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
+  <div class="container max-w-screen-lg mx-auto">
+    <div>
+      <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+        <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+          <div class="text-gray-600">
+            <p class="font-medium text-lg">Create Events</p>
+            <p>Please fill out all the fields.</p>
+          </div>
+
+          <div class="lg:col-span-2">
+            <form method='POST'>
+                {% csrf_token %}
+                <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                  <div class="md:col-span-5">
+                    <label for="title">Title</label>
+                    <input
+                      type="text"
+                      name="title"
+                      id="title"
+                      class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                      value=""
+                    />
+                  </div>
+    
+                  <div class="md:col-span-5">
+                    <label for="description">Description</label>
+                    <textarea
+                      name="email"
+                      id="email"
+                      class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                      value=""
+                      placeholder="Description event..."
+                    ></textarea>
+                  </div>
+    
+                  {% comment %}
+                  <div class="md:col-span-3">
+                    <label for="address">Address / Street</label>
+                    <input
+                      type="text"
+                      name="address"
+                      id="address"
+                      class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                      value=""
+                      placeholder=""
+                    />
+                  </div>
+    
+                  <div class="md:col-span-2">
+                    <label for="city">City</label>
+                    <input
+                      type="text"
+                      name="city"
+                      id="city"
+                      class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                      value=""
+                      placeholder=""
+                    />
+                  </div>
+                  {% endcomment %}
+    
+                  <div class="md:col-span-2">
+                    <label for="date">Date</label>
+                    <div
+                      class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1"
+                    >
+                      <input
+                        type="datetime-local"
+                        name="date"
+                        id="date"
+                        placeholder="Date"
+                        class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
+                        value=""
+                      />
+                    </div>
+                  </div>
+    
+                  <div class="md:col-span-2">
+                    <label for="location">Location</label>
+                    <div
+                      class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1"
+                    >
+                      <input
+                        name="location"
+                        id="location"
+                        placeholder="Location"
+                        class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
+                        value=""
+                      />
+                    </div>
+                  </div>
+    
+                  <div class="md:col-span-2">
+                    <label for="category">Category</label>
+                    <select
+                      name="category"
+                      id="category"
+                      class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50 focus:z-10"
+                    >
+                      {% for category in categories %}
+                      <option value="{{ category.id }}">{{ category.name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+    
+    
+                  <div class="md:col-span-2">
+                    <label for="max_capacity">Maximum Capacity</label>
+                    <div
+                      class="h-10 w-28 bg-gray-50 flex border border-gray-200 rounded items-center mt-1"
+                    >
+                      <input
+                        type='number'
+                        name="max_capacity"
+                        id="max_capacity"
+                        placeholder="0"
+                        class="px-2 text-center appearance-none outline-none text-gray-800 w-full bg-transparent"
+                        value="0"
+                      />
+                    </div>
+                  </div>
+    
+                  <div class="md:col-span-5 text-right">
+                    <div class="inline-flex items-end">
+                      <button
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit"
+                      >
+                        Create Event
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
